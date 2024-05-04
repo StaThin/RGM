@@ -1,0 +1,494 @@
+---
+  title: "Examples from the book on regression graphs"
+author: Giovanni Marchetti and Monia Lupparelli
+date: "09 04 2024"
+format: 
+  html:
+  embed-resources: true
+pdf:
+  documentclass: scrartcl
+number-sections: false
+colorlinks: true
+---
+
+  \newcommand{\ci}{\hspace{0.1em}\perp\hspace{-0.95em}\perp\, }
+```{r}
+#| message: false
+source("~/Documents/R_packages/cat_regression_chains/RCG/funs_RCG.R")
+library("bnlearn") 
+library("ggm")
+library("igraph")
+library("CauseAndCorrelation")
+library("pwSEM")
+library(mnormt)
+```
+
+```{r, setup}
+#| cache: true
+#| message: false
+#| warning: false
+```
+
+## Example: digoxine clearance
+
+Data from Edwards (2000)
+
+```{r}
+creat = c(19.5,  24.7,  26.5,  31.1,  31.3,  31.8,  34.1,  36.6,
+          42.4,  42.8,  44.2,  49.7,  51.3,  55.0,  55.9,  61.2,  63.1,  63.7,    66.8 ,  72.4,  80.9,  82.0,  82.7,  87.9 ,  101.5 ,  105.0 ,  110.5, 
+          114.2,  117.8,  122.6, 127.9, 135.6, 136.0, 153.5, 201.1)
+
+digo = c(17.5, 34.8, 11.4, 29.3, 13.9, 31.6, 20.7, 34.1, 25.0,
+         47.4,31.8, 36.1,22.7, 30.7, 42.5, 42.4, 61.1, 38.2,             
+         37.5,50.1,50.2,50.0,31.8,55.4,110.6,114.4,69.3,84.8,63.9,76.1,112.8,
+         82.2,46.8,137.7,76.1)
+
+urin = c(0.74,0.43,0.11,1.48,0.97,1.12,1.77,0.70,0.93,2.50,0.89,
+         0.52,0.33,0.80,1.02,0.56,0.93,0.44,0.50, 0.97, 1.02, 0.95, 0.76,
+         1.06, 1.38, 1.85, 2.25, 1.76, 1.60, 0.88, 1.70, 0.98, 0.94, 1.76, 0.87)
+
+digox = data.frame(creat, digo, urin)
+pairs(digox)
+
+```
+
+Now I compute the correlation and partial correlation matrix
+
+```{r}
+library(ggm)
+round(correlations(cor(digox)),3)
+```
+
+### Fit a model of conditional independence between `creat` and `urin`
+
+```{r}
+G = UG( ~ creat*digo + urin*digo)
+drawGraph(G)
+out = fitConGraph(G, cov(digox), n = 35)
+round(correlations(out$Shat),3)
+```
+
+### Fiji fertility survey
+
+Women with age from 20-49
+
+```{r}
+source("https://raw.githubusercontent.com/StaThin/data/master/fiji.R")
+dim(fiji)
+summary(fiji)
+mq = lm(F ~ A + I(A^2) + E + U*I, data = fiji)
+options(scipen = 10)
+round(summary(mq)$coef,3)
+```
+
+### Fiji2
+
+Women with age 35-49
+
+```{r}
+fiji2 = read.csv("~/Documents/R_packages/cat_regression_chains/RCG/fiji_data2.csv")
+dim(fiji2)
+summary(fiji2)
+```
+
+### Path Analysis
+
+```{r}
+mq2 = lm(F ~ M + E + U+I, data = fiji2)
+round(summary(mq2)$coef,3)
+```
+
+```{r}
+mq3 = lm(F ~ M + E + U+ I+A, data = fiji2)
+round(summary(mq3)$coef,3)
+```
+
+```{r}
+mq4 = lm(F ~ M + E + U+ A, data = fiji2)
+round(summary(mq4)$coef,3)
+```
+
+### Best model
+
+```{r}
+mq = lm(F ~ M  + E + U*I + A, data = fiji2)
+round(summary(mq)$coef,3)
+```
+
+### Second equation (Bivariate regression)
+
+```{r}
+resp = list(~ M*E, ~ A*U*I)
+regr = list(M ~ A + U + I,  E ~ A + U + I)
+g = makeRCG(resp, regr)
+coor =
+  matrix(c(
+    10, 90,
+    10, 10,
+    80, 90,
+    80, 50,
+    80, 10
+  ), byrow = TRUE, ncol = 2)
+g
+drawGraph(g, coor = coor)
+```
+
+```{r}
+S = cov(fiji2[, c("M", "E", "A", "I", "U")])
+S
+```
+
+Fitting the multivariate regression graph
+
+```{r}
+out = fitAncestralGraph(g, S, 1703)
+out
+```
+
+### Stratification
+
+```{r}
+fijian <- fiji2[fiji2$I == 0,-5]
+indian <- fiji2[fiji2$I == 1,-5]
+
+```
+
+### Full graph
+
+```{r}
+gfull <- makeMG(dg = DAG(F ~ M+E+A+U, M ~ A + U,  E ~ A + U), 
+                bg = UG(~ M*E +  A*U))
+coor = matrix(c(
+  7, 40,
+  36, 64,
+  36, 19,
+  79, 66,
+  81, 20
+), byrow = TRUE, ncol = 2)
+gfull
+drawGraph(gfull, coor=coor)
+```
+
+### Indians
+
+```{r}
+ni = nrow(indian)
+Si = cov(indian)
+ord = c(1,3,4,2,5)
+Si = Si[ord,ord]
+outi = fitAncestralGraph(gfull, Si, ni)
+outi
+```
+
+```{r}
+summaryRCG(outi, n = ni)
+```
+
+### Reduced model Indians
+
+```{r}
+
+gred <- makeMG(dg = DAG(F ~ M+A+U, M ~  U,  E ~ A + U), 
+               bg = UG(~ M*E + A*U))
+gred <- gred[c(1,2,5,3,4), c(1,2,5,3,4)]
+coor = matrix(c(
+  7, 40,
+  36, 64,
+  36, 19,
+  79, 66,
+  81, 20
+), byrow = TRUE, ncol = 2)
+gred
+drawGraph(gred, coor=coor)
+```
+
+### Fit reduced model for indians
+
+```{r}
+outired = fitAncestralGraph(gred, Si, ni)
+outired
+summaryRCG(outired, n = ni)
+```
+
+### Fit reduced model using `sem`
+
+```{r}
+library(sem)
+red_mod_I = specifyModel(text="
+M -> F, bFM, NA
+A -> F, bFA, NA
+U -> F, bFU, NA
+U -> M, bMU, NA
+U -> E, bEU, NA
+A -> E, bEA, NA
+A -> M, bMA, NA
+F <-> F, oFF, NA
+M <-> M, oMM, NA
+M <-> E, oME, NA
+E <-> E, oEE, NA
+A <-> A, oAA, NA
+A <-> U, oAU, NA
+U <-> U, oUU, NA
+")
+mod_I=  sem(red_mod_I, Si, N = ni)
+summary(mod_I)
+```
+
+### Data on Fijians
+
+```{r}
+nf = nrow(fijian)
+Sf = cov(fijian)
+ord = c(1,3,4,2,5)
+Sf = Sf[ord,ord]
+outf = fitAncestralGraph(gfull, Sf, nf)
+outf
+```
+
+```{r}
+summaryRCG(outf, n = nf)
+```
+
+### Fit using `sem` for Fijians
+
+Saturated model
+
+```{r}
+sat_mod_F = specifyModel(text="
+M -> F, bFM, NA
+A -> F, bFA, NA
+U -> F, bFU, NA
+E -> F, bFE, NA
+
+U -> M, bMU, NA
+A -> M, bMA, NA
+
+A -> E, bEA, NA
+U -> E, bEU, NA
+
+F <-> F, oFF, NA
+M <-> M, oMM, NA
+M <-> E, oME, NA
+E <-> E, oEE, NA
+A <-> A, oAA, NA
+A <-> U, oAU, NA
+U <-> U, oUU, NA
+")
+fit_sat_F =  sem(sat_mod_F, Sf, N = nf)
+options(scipen = 10)
+print(summary(fit_sat_F), digits = 3)
+```
+
+Reduced model
+
+```{r}
+red_mod_F = specifyModel(text="
+M -> F, bFM, NA
+A -> F, bFA, NA
+U -> F, bFU, NA
+U -> M, bMU, NA
+A -> E, bEA, NA
+F <-> F, oFF, NA
+M <-> M, oMM, NA
+M <-> E, oME, NA
+E <-> E, oEE, NA
+A <-> A, oAA, NA
+# A <-> U, oAU, NA
+U <-> U, oUU, NA
+")
+mod_F=  sem(red_mod_F, Sf, N = nf)
+options(scipen = 0)
+print(summary(mod_F), digits = 3)
+```
+
+### Data on Women's Labour-Force Participation
+
+```{r}
+library(car)
+data(Womenlf)
+wlf = cbind(Womenlf[,-2], hihigh = 0+(Womenlf$hincome > 14) )
+wlf$partic =  0 + (wlf$partic == "fulltime")
+wlf$hihigh = factor(wlf$hihigh)
+wlf$hincome = Womenlf$hincome
+```
+
+
+
+
+## Test conditional independency
+
+```{r}
+wlf3 <- wlf[,c(2, 3,4)]
+#hinc <- factor(0+(wlf$hincome <= median(wlf$hincome)))
+#wlf_fact[,3] <- hinc 
+ftable(region~  children + hihigh, table(wlf3)) 
+```
+
+```{r}
+ci.test( "hihigh", "children", "region", data = wlf3, test = "mi")
+```
+### Mixed data 
+```{r}
+m1 = glm(partic ~ children*hihigh, family = binomial, data = wlf[,c(1,2,4)])
+deviance(m1)
+logLik(m1)
+```
+```{r}
+ftable(partic ~ children+hihigh, data = wlf)
+```
+
+### Fit partic
+
+```{r}
+m1 = glm(partic ~ children + hihigh + region + 
+           children:region  + hihigh:region, family = binomial, data = wlf)
+round(summary(m1)$coef, 3)
+```
+
+```{r}
+m1a = glm(partic ~ children + hihigh + region + 
+            children:region, family = binomial, data = wlf)
+m1b = glm(partic ~ children + hihigh + region, 
+          family = binomial, data = wlf)
+m1c = glm(partic ~ children + hihigh, 
+          family = binomial, data = wlf)
+anova(m1a, m1, test = "Chisq")
+anova(m1b, m1a, test = "Chisq")
+anova(m1c, m1b, test = "Chisq")
+Anova(m1b)
+```
+
+```{r}
+library(effects)
+plot (allEffects (m1), ask=FALSE)
+plot (allEffects (m1a), ask=FALSE)
+plot (allEffects (m1b), ask=FALSE)
+plot (allEffects (m1c), ask=FALSE)
+```
+
+```{r}
+round(summary(m1a)$coef, 3)
+round(summary(m1b)$coef, 3)
+round(summary(m1c)$coef, 3)
+```
+
+### Fit children
+
+```{r}
+m2 = glm(children ~ hihigh + region, family = binomial, data = wlf)
+round(summary(m2)$coef, 3)
+Anova(m2)
+```
+
+### Fit hihigh
+
+```{r}
+m3 = glm(hihigh ~ region, family = binomial, data = wlf)
+round(summary(m3)$coef, 3)
+Anova(m3)
+```
+
+### Data
+
+```{r}
+r = levels(wlf$region)
+for(j in r){
+  w = wlf[wlf$region==j,c(1,2,4)]
+  cat(j,"\n")
+  print(as.data.frame(table(w)))
+}
+```
+
+### Summary
+
+```{r}
+require(car)
+m1 = glm(partic ~ children + hihigh + region, family = binomial, data = wlf)
+round(summary(m1)$coef[,c(1,2,3)],2)
+m10 = glm(partic ~ children + hihigh, family = binomial, data = wlf)
+round(summary(m10)$coef[,c(1,2,3)],2)
+anova(m10, m1)
+
+m2 = glm(children ~ hihigh + region, family = binomial, data = wlf)
+round(summary(m2)$coef[,c(1,2,3)],2)
+m20 = glm(children ~ region, family = binomial, data = wlf)
+round(summary(m20)$coef[,c(1,2,3)],2)
+anova(m20, m2)
+
+m3 = glm(hihigh ~ region, family = binomial, data = wlf)
+round(summary(m3)$coef[,c(1,2,3)],2)
+m30 = glm(hihigh ~ 1, family = binomial, data = wlf)
+round(summary(m30)$coef[,c(1,2,3), drop = FALSE],2)
+anova(m30, m3, test = "Chisq")
+
+```
+
+## Drop-out data
+
+```{r}
+drp <- read.table("dropout.txt", header = TRUE, stringsAsFactors = TRUE)
+change <- drp[, c("B", "C", "D", "E", "F")]
+change <- sapply(change, function(z) as.character((1+z)/2))
+change <- as.data.frame(change, stringsAsFactors = TRUE)
+tab <- table(change)
+round(100 * prop.table(margin.table(tab, "B")), 2)
+round(100 * prop.table(margin.table(tab, "C")), 2)
+round(100 * prop.table(margin.table(tab, "D")), 2)
+round(100 * prop.table(margin.table(tab, "E")), 2)
+round(100 * prop.table(margin.table(tab, "F")), 2)
+```
+
+```{r}
+margin.table(tab, c("E", "F"))
+ci_test("E", "F", test = "mi", data = change)
+```
+
+```{r}
+ci_test("D", "F", "E", test = "mi", data = change)
+```
+```{r}
+ci_test("C", c("E", "F"), "D", test = "mi", data = change)
+```
+```{r}
+ci_test("B", "C", c("D", "E", "F"), test = "mi", data = change)
+```
+
+```{r}
+#| fig-width: 3
+#| fig-height: 2.5
+dag <- DAG(B~ D+E+F, D ~C+E, E~F)
+co <-
+  structure(c(9, 40, 62, 95, 68, 73, 44, 59, 80, 20), dim = c(5L, 
+                                                              2L))
+drawGraph(dag, coor = co, lwd = 1)
+```
+```{r}
+ci_fact(dag)
+```
+```{r}
+ci_test_DAG(dag, test = "mi", data = change)
+```
+
+
+## Lienert data 
+
+```{r}
+p <- c( 21, 2, 5, 13, 4, 11, 16, 1)
+lienert <- cbind(expand.grid(X1 = c(0,1), X2 = c(0,1), X3 = c(0,1) ), Freq = p)
+tab <- xtabs(Freq ~ ., lienert)
+```
+
+## Coppen data
+
+```{r}
+Freq <- c(15, 30, 9, 32, 23, 22, 14, 16,25,22,46,27,14,8,47,12)
+X <- expand.grid(X2 = factor(1:2), X4 = factor(1:2), X1 = factor(1:2), X3 = c("y", "n"))
+coppen <- cbind(X, Freq)
+coppen_data <- tab2data(coppen)
+```
+
+```{r}
+ci_test("X1", c("X3", "X4"), test = "mi", data = coppen_data)
+ci_test("X4", c("X1", "X2"), test = "mi", data = coppen_data)
+```
+
