@@ -1,3 +1,20 @@
+#' makeP
+#'
+#' @param B a matrix of parameters
+#'
+#' @return P a matrix such that P %*% beta = vec(B)
+#' @export
+#'
+#' @examples
+`makeP` <- function(B) {
+    vb <- as.vector(B)
+    pos <- which(vb != 0)
+    beta <- vb[pos]
+    P <- matrix(0, prod(dim(B)), length(pos))
+    P[pos, ] <- diag(length(pos))
+    list(P = P, beta = beta)
+}
+
 `summaryRCG` <- function(out, n, dig = 3) {
     S <- out$Shat
     I_B <- out$Bhat
