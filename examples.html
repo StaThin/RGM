@@ -132,144 +132,22 @@ window.Quarto = {
 <p>15 May 2024</p>
 <section id="example-1.3---lawyers-ratings-of-state-judges" class="level2">
 <h2 class="anchored" data-anchor-id="example-1.3---lawyers-ratings-of-state-judges">Example 1.3 - Lawyer’s ratings of state judges</h2>
-<div id="cell-3" class="cell" data-scrolled="true" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="19">
+<p>There are 12 ratings for 43 judges.</p>
+<div id="cell-4" class="cell" data-scrolled="true" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(USJudgeRatings)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(USJudgeRatings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(USJudgeRatings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>A data.frame: 6 x 12</caption>
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" scope="col">CONT</th>
-<th data-quarto-table-cell-role="th" scope="col">INTG</th>
-<th data-quarto-table-cell-role="th" scope="col">DMNR</th>
-<th data-quarto-table-cell-role="th" scope="col">DILG</th>
-<th data-quarto-table-cell-role="th" scope="col">CFMG</th>
-<th data-quarto-table-cell-role="th" scope="col">DECI</th>
-<th data-quarto-table-cell-role="th" scope="col">PREP</th>
-<th data-quarto-table-cell-role="th" scope="col">FAMI</th>
-<th data-quarto-table-cell-role="th" scope="col">ORAL</th>
-<th data-quarto-table-cell-role="th" scope="col">WRIT</th>
-<th data-quarto-table-cell-role="th" scope="col">PHYS</th>
-<th data-quarto-table-cell-role="th" scope="col">RTEN</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" scope="row">AARONSON,L.H.</td>
-<td>5.7</td>
-<td>7.9</td>
-<td>7.7</td>
-<td>7.3</td>
-<td>7.1</td>
-<td>7.4</td>
-<td>7.1</td>
-<td>7.1</td>
-<td>7.1</td>
-<td>7.0</td>
-<td>8.3</td>
-<td>7.8</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th" scope="row">ALEXANDER,J.M.</td>
-<td>6.8</td>
-<td>8.9</td>
-<td>8.8</td>
-<td>8.5</td>
-<td>7.8</td>
-<td>8.1</td>
-<td>8.0</td>
-<td>8.0</td>
-<td>7.8</td>
-<td>7.9</td>
-<td>8.5</td>
-<td>8.7</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" scope="row">ARMENTANO,A.J.</td>
-<td>7.2</td>
-<td>8.1</td>
-<td>7.8</td>
-<td>7.8</td>
-<td>7.5</td>
-<td>7.6</td>
-<td>7.5</td>
-<td>7.5</td>
-<td>7.3</td>
-<td>7.4</td>
-<td>7.9</td>
-<td>7.8</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th" scope="row">BERDON,R.I.</td>
-<td>6.8</td>
-<td>8.8</td>
-<td>8.5</td>
-<td>8.8</td>
-<td>8.3</td>
-<td>8.5</td>
-<td>8.7</td>
-<td>8.7</td>
-<td>8.4</td>
-<td>8.5</td>
-<td>8.8</td>
-<td>8.7</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" scope="row">BRACKEN,J.J.</td>
-<td>7.3</td>
-<td>6.4</td>
-<td>4.3</td>
-<td>6.5</td>
-<td>6.0</td>
-<td>6.2</td>
-<td>5.7</td>
-<td>5.7</td>
-<td>5.1</td>
-<td>5.3</td>
-<td>5.5</td>
-<td>4.8</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th" scope="row">BURNS,E.B.</td>
-<td>6.2</td>
-<td>8.8</td>
-<td>8.7</td>
-<td>8.5</td>
-<td>7.9</td>
-<td>8.0</td>
-<td>8.1</td>
-<td>8.0</td>
-<td>8.0</td>
-<td>8.0</td>
-<td>8.6</td>
-<td>8.6</td>
-</tr>
-</tbody>
-</table>
-</div>
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>43</li><li>12</li></ol>
 </div>
 </div>
 <p>The variables <code>INTG</code> (judicial integrity), <code>DILG</code> (diligence) and <code>CONT</code> (number of contacts of lawyer with judge) are observed on 43 judges. The sample correlation is obtained.</p>
-<div id="cell-5" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="45">
+<div id="cell-6" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_judge <span class="ot">&lt;-</span> USJudgeRatings[, <span class="fu">c</span>(<span class="st">"INTG"</span>, <span class="st">"DILG"</span>, <span class="st">"CONT"</span>)]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(data_judge,<span class="at">panel =</span> panel.smooth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -280,7 +158,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="cell-6" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="39">
+<div id="cell-7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_judge)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(R, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -319,7 +197,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="cell-7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="41">
+<div id="cell-8" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>( CONT <span class="sc">~</span> INTG<span class="sc">*</span>DILG, <span class="at">data =</span> data_judge) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>
@@ -343,16 +221,28 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 </div>
 </div>
 <p>The <span class="math inline">\(F\)</span> statistic for the hypothesis <span class="math inline">\(CONT \perp\!\!\!\perp INTG, DILG\)</span> is not rejected.</p>
+<p>The bi-directed graph shown below represents the joint independence.</p>
+<div id="cell-10" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">UG</span>(<span class="sc">~</span> CONT <span class="sc">+</span> INTG<span class="sc">*</span>DILG)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(G)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="examples_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="example-1.8---fiji-fertility-survey" class="level2">
 <h2 class="anchored" data-anchor-id="example-1.8---fiji-fertility-survey">Example 1.8 - Fiji Fertility Survey</h2>
 <p>Variables - <code>A</code>, Age - <code>M</code> Age at first marriage - <code>E</code> Education 𝐸 (in completed years) - <code>U</code> Residence (urban = 1 or rural = 0), - <code>F</code> Fertility (number of children ever born),</p>
 <p>observed on a sample of 774 married women of Fijian ethnicity, aged 35-49.</p>
-<div id="cell-10" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fiji <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/fiji_data2.csv"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fijians <span class="ot">&lt;-</span> fiji[fiji<span class="sc">$</span>I <span class="sc">==</span> <span class="dv">0</span>,<span class="sc">-</span><span class="dv">5</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(fijians))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fijians)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fiji <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/fiji_data2.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fijians <span class="ot">&lt;-</span> fiji[fiji<span class="sc">$</span>I <span class="sc">==</span> <span class="dv">0</span>,<span class="sc">-</span><span class="dv">5</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(fijians))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fijians)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 774   5</code></pre>
 </div>
@@ -376,11 +266,11 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 <section id="the-full-regression-graph" class="level3">
 <h3 class="anchored" data-anchor-id="the-full-regression-graph">The Full regression graph</h3>
 <p>To create an adjacency matrix for a RC graph we are going to use the package <strong>ggm</strong>. The main function used is <code>makeMG</code> (make a mixed graph).</p>
-<div id="cell-12" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggm"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gfull <span class="ot">&lt;-</span> <span class="fu">makeMG</span>(<span class="at">dg =</span> <span class="fu">DAG</span>(F <span class="sc">~</span> M<span class="sc">+</span>E<span class="sc">+</span>A<span class="sc">+</span>U, M <span class="sc">~</span> U <span class="sc">+</span> A,  E <span class="sc">~</span> U <span class="sc">+</span> A), </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">bg =</span> <span class="fu">UG</span>(<span class="sc">~</span> M<span class="sc">*</span>E <span class="sc">+</span>  U<span class="sc">*</span>A))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>gfull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-14" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggm"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gfull <span class="ot">&lt;-</span> <span class="fu">makeMG</span>(<span class="at">dg =</span> <span class="fu">DAG</span>(F <span class="sc">~</span> M<span class="sc">+</span>E<span class="sc">+</span>A<span class="sc">+</span>U, M <span class="sc">~</span> U <span class="sc">+</span> A,  E <span class="sc">~</span> U <span class="sc">+</span> A), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">bg =</span> <span class="fu">UG</span>(<span class="sc">~</span> M<span class="sc">*</span>E <span class="sc">+</span>  U<span class="sc">*</span>A))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>gfull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -442,15 +332,15 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 </div>
 </div>
 <p>Plot the graph</p>
-<div id="cell-14" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>co <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>, <span class="dv">36</span>, <span class="dv">36</span>, <span class="dv">64</span>, <span class="dv">36</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">64</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>), <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(gfull, <span class="at">coor =</span> co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-16" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>co <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>, <span class="dv">36</span>, <span class="dv">36</span>, <span class="dv">64</span>, <span class="dv">36</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">64</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>), <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(gfull, <span class="at">coor =</span> co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="examples_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="examples_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -458,9 +348,9 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 </section>
 <section id="fit-a-regression-model-for-fertility" class="level3">
 <h3 class="anchored" data-anchor-id="fit-a-regression-model-for-fertility">Fit a regression model for fertility</h3>
-<div id="cell-16" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(F <span class="sc">~</span> M <span class="sc">+</span> E <span class="sc">+</span> A <span class="sc">+</span> U, <span class="at">data =</span> fijians)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m1)<span class="sc">$</span>coef, <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-18" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(F <span class="sc">~</span> M <span class="sc">+</span> E <span class="sc">+</span> A <span class="sc">+</span> U, <span class="at">data =</span> fijians)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m1)<span class="sc">$</span>coef, <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -516,9 +406,9 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 </div>
 </div>
 <p>Suggest removing arrow <span class="math inline">\(F \leftarrow E\)</span></p>
-<div id="cell-18" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> A <span class="sc">+</span> U , <span class="at">data =</span> fijians)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> A <span class="sc">+</span> U , <span class="at">data =</span> fijians)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -560,9 +450,9 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 </div>
 </div>
 <p>Suggest removing arrow <span class="math inline">\(M \leftarrow A\)</span></p>
-<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(E <span class="sc">~</span> A <span class="sc">+</span> U , <span class="at">data =</span> fijians)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m3)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-22" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(E <span class="sc">~</span> A <span class="sc">+</span> U , <span class="at">data =</span> fijians)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m3)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -605,16 +495,16 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 </div>
 <p>Perhaps we can remove the arrow <span class="math inline">\(E \leftarrow U\)</span></p>
 <p>The reduced regression graph</p>
-<div id="cell-23" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>gred <span class="ot">&lt;-</span> gfull</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"E"</span>, <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"A"</span>, <span class="st">"M"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"U"</span>, <span class="st">"E"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(gred, <span class="at">coor =</span> co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-25" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gred <span class="ot">&lt;-</span> gfull</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"E"</span>, <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"A"</span>, <span class="st">"M"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"U"</span>, <span class="st">"E"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(gred, <span class="at">coor =</span> co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="examples_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="examples_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -623,37 +513,37 @@ F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
 <section id="mle-fit-using-package-sem" class="level3">
 <h3 class="anchored" data-anchor-id="mle-fit-using-package-sem">MLE fit using package <strong>sem</strong></h3>
 <p>Structural equations for the saturated model</p>
-<div id="cell-25" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sem"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-27" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sem"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-26" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sat_mod_F <span class="ot">&lt;-</span> <span class="fu">specifyModel</span>(<span class="at">text=</span><span class="st">"</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">M -&gt; F, bFM, NA</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; F, bFA, NA</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; F, bFU, NA</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">E -&gt; F, bFE, NA</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; M, bMU, NA</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; M, bMA, NA</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; E, bEA, NA</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; E, bEU, NA</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">F &lt;-&gt; F, oFF, NA</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; M, oMM, NA</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; E, oME, NA</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="st">E &lt;-&gt; E, oEE, NA</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; A, oAA, NA</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; U, oAU, NA</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="st">U &lt;-&gt; U, oUU, NA</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-28" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sat_mod_F <span class="ot">&lt;-</span> <span class="fu">specifyModel</span>(<span class="at">text=</span><span class="st">"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">M -&gt; F, bFM, NA</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; F, bFA, NA</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; F, bFU, NA</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">E -&gt; F, bFE, NA</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; M, bMU, NA</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; M, bMA, NA</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; E, bEA, NA</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; E, bEU, NA</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="st">F &lt;-&gt; F, oFF, NA</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; M, oMM, NA</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; E, oME, NA</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="st">E &lt;-&gt; E, oEE, NA</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; A, oAA, NA</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; U, oAU, NA</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="st">U &lt;-&gt; U, oUU, NA</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>NOTE: it is generally simpler to use specifyEquations() or cfa()
       see ?specifyEquations
 </code></pre>
 </div>
 </div>
-<div id="cell-27" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(fijians)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m_sat <span class="ot">&lt;-</span>  <span class="fu">sem</span>(sat_mod_F, S, <span class="at">N =</span> <span class="dv">774</span>, <span class="at">start.tol =</span> <span class="fl">1e-09</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_sat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-29" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(fijians)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m_sat <span class="ot">&lt;-</span>  <span class="fu">sem</span>(sat_mod_F, S, <span class="at">N =</span> <span class="dv">774</span>, <span class="at">start.tol =</span> <span class="fl">1e-09</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_sat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>
  Model Chisquare =  -6.865619e-13   Df =  0 Pr(&gt;Chisq) = NA
@@ -690,23 +580,23 @@ oUU  0.198550230 0.01009940 19.65960325 4.784540e-86 U &lt;--&gt; U
 </div>
 </div>
 <p>Reduced model</p>
-<div id="cell-29" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>red_mod_F <span class="ot">&lt;-</span> <span class="fu">specifyModel</span>(<span class="at">text=</span><span class="st">"</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">M -&gt; F, bFM, NA</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; F, bFA, NA</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; F, bFU, NA</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; M, bMU, NA</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; E, bEA, NA</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">F &lt;-&gt; F, oFF, NA</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; M, oMM, NA</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; E, oME, NA</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">E &lt;-&gt; E, oEE, NA</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; A, oAA, NA</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; U, oAU, NA</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="st">U &lt;-&gt; U, oUU, NA</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>m_red <span class="ot">&lt;-</span>  <span class="fu">sem</span>(red_mod_F, S, <span class="at">N =</span> <span class="dv">774</span>, <span class="at">start.tol =</span> <span class="fl">1e-09</span>)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-31" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>red_mod_F <span class="ot">&lt;-</span> <span class="fu">specifyModel</span>(<span class="at">text=</span><span class="st">"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="st">M -&gt; F, bFM, NA</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; F, bFA, NA</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; F, bFU, NA</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; M, bMU, NA</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; E, bEA, NA</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="st">F &lt;-&gt; F, oFF, NA</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; M, oMM, NA</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; E, oME, NA</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="st">E &lt;-&gt; E, oEE, NA</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; A, oAA, NA</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; U, oAU, NA</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="st">U &lt;-&gt; U, oUU, NA</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>m_red <span class="ot">&lt;-</span>  <span class="fu">sem</span>(red_mod_F, S, <span class="at">N =</span> <span class="dv">774</span>, <span class="at">start.tol =</span> <span class="fl">1e-09</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>NOTE: it is generally simpler to use specifyEquations() or cfa()
       see ?specifyEquations
@@ -748,14 +638,14 @@ oUU  0.198550230 0.01009940 19.65960325 4.784540e-86 U &lt;--&gt; U
 <section id="fitting-the-multivariate-regression-chain-graph" class="level3">
 <h3 class="anchored" data-anchor-id="fitting-the-multivariate-regression-chain-graph">Fitting the multivariate regression chain graph</h3>
 <p>The regression chain graphs is a special case of ancestral graph. Thus you can use the function <code>fitAncestralGraph</code> in package <strong>ggm</strong>. Source also the file <code>dome_functions.R</code>.</p>
-<div id="cell-31" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./R/some_functions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-33" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./R/some_functions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Saturated model</p>
-<div id="cell-33" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggm"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>out_sat <span class="ot">&lt;-</span> <span class="fu">fitAncestralGraph</span>(gfull, S, <span class="at">n =</span> <span class="dv">774</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRCG</span>(out_sat, <span class="at">n =</span> <span class="dv">774</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-35" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggm"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>out_sat <span class="ot">&lt;-</span> <span class="fu">fitAncestralGraph</span>(gfull, S, <span class="at">n =</span> <span class="dv">774</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRCG</span>(out_sat, <span class="at">n =</span> <span class="dv">774</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      beta    se     LB     UB
 F|A  0.111 0.025  0.046  0.176
@@ -779,9 +669,9 @@ U~U  0.199 0.010  0.173  0.225</code></pre>
 </div>
 </div>
 <p>Reduced model</p>
-<div id="cell-35" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>out_red <span class="ot">&lt;-</span> <span class="fu">fitAncestralGraph</span>(gred, S, <span class="at">n =</span> <span class="dv">774</span>, <span class="at">tol =</span> <span class="fl">1e-09</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRCG</span>(out_sat, <span class="at">n =</span> <span class="dv">774</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-37" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>out_red <span class="ot">&lt;-</span> <span class="fu">fitAncestralGraph</span>(gred, S, <span class="at">n =</span> <span class="dv">774</span>, <span class="at">tol =</span> <span class="fl">1e-09</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRCG</span>(out_sat, <span class="at">n =</span> <span class="dv">774</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      beta    se     LB     UB
 F|A  0.111 0.025  0.046  0.176
@@ -809,10 +699,10 @@ U~U  0.199 0.010  0.173  0.225</code></pre>
 <section id="example-1.13-data-on-womens-labour-force-participation" class="level2">
 <h2 class="anchored" data-anchor-id="example-1.13-data-on-womens-labour-force-participation">Example 1.13 Data on Women’s Labour-Force Participation</h2>
 <p>The original data are in R package <strong>carData</strong>. The first 3 variables are transformed to binary data. The resulting variables are all categorical.</p>
-<div id="cell-37" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>wlf_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"./data/wlfdata.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>wlf_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">lapply</span>(wlfdata, factor))</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(R <span class="sc">~</span> H <span class="sc">+</span> C <span class="sc">+</span> L, <span class="at">data =</span> wlfdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>wlf_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"./data/wlfdata.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>wlf_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">lapply</span>(wlfdata, factor))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(R <span class="sc">~</span> H <span class="sc">+</span> C <span class="sc">+</span> L, <span class="at">data =</span> wlfdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>ERROR: Error in eval(expr, envir, enclos): object 'wlfdata' not found</code></pre>
 </div>
@@ -820,9 +710,9 @@ U~U  0.199 0.010  0.173  0.225</code></pre>
 <section id="test-conditional-independency" class="level3">
 <h3 class="anchored" data-anchor-id="test-conditional-independency">Test conditional independency</h3>
 <p>You need package <strong>bnlearn</strong> for this.</p>
-<div id="cell-39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bnlearn)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.test</span>( <span class="st">"H"</span>, <span class="st">"C"</span>, <span class="st">"L"</span>, <span class="at">data =</span> wlf_data, <span class="at">test =</span> <span class="st">"mi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-41" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bnlearn)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.test</span>( <span class="st">"H"</span>, <span class="st">"C"</span>, <span class="st">"L"</span>, <span class="at">data =</span> wlf_data, <span class="at">test =</span> <span class="st">"mi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>
     Mutual Information (disc.)
@@ -833,9 +723,9 @@ alternative hypothesis: true value is greater than 0</code></pre>
 </div>
 </div>
 <p>Response <span class="math inline">\(L\)</span>: Fit an additive logistic model</p>
-<div id="cell-41" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>m_add1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(L <span class="sc">~</span> C <span class="sc">+</span> H <span class="sc">+</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_add1)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-43" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>m_add1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(L <span class="sc">~</span> C <span class="sc">+</span> H <span class="sc">+</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_add1)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -905,10 +795,10 @@ alternative hypothesis: true value is greater than 0</code></pre>
 </div>
 </div>
 <p>This suggests to remove the arrow <span class="math inline">\(L \leftarrow R\)</span>. The reduced model is below with a likelihood ratio test.</p>
-<div id="cell-43" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>m_red1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(L <span class="sc">~</span> C <span class="sc">+</span> H, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_red1)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">anova</span>(m_red1, m_add1, <span class="at">test =</span> <span class="st">"Chisq"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-45" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>m_red1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(L <span class="sc">~</span> C <span class="sc">+</span> H, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_red1)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">anova</span>(m_red1, m_add1, <span class="at">test =</span> <span class="st">"Chisq"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>
 Call:
@@ -941,9 +831,9 @@ Model 2: L ~ C + H + R
 </div>
 </div>
 <p>Response <span class="math inline">\(C\)</span>: fit an additive model</p>
-<div id="cell-45" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>m_add2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(C <span class="sc">~</span> H <span class="sc">+</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_add2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-47" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>m_add2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(C <span class="sc">~</span> H <span class="sc">+</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_add2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -1006,9 +896,9 @@ Model 2: L ~ C + H + R
 </div>
 </div>
 <p>The predictor <span class="math inline">\(H\)</span> is not significant. The reduced model is</p>
-<div id="cell-47" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>m_red2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(C<span class="sc">~</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlfdata)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_red2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-49" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>m_red2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(C<span class="sc">~</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlfdata)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_red2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -1073,11 +963,11 @@ Model 2: C ~ H + R
 </div>
 </div>
 <p>Response <span class="math inline">\(H\)</span>: fit a multinomial logit model</p>
-<div id="cell-49" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(H <span class="sc">~</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_3)<span class="sc">$</span>coef, <span class="dv">3</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>m_red3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(H <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial, <span class="at">data =</span> wlfdata)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_red3, m_3, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-51" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(H <span class="sc">~</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_3)<span class="sc">$</span>coef, <span class="dv">3</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>m_red3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(H <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial, <span class="at">data =</span> wlfdata)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_red3, m_3, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
@@ -1183,11 +1073,11 @@ Model 2: C ~ H + R
 </section>
 <section id="example-2.1---lienert-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-2.1---lienert-data">Example 2.1 - Lienert data</h2>
-<div id="cell-52" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./data/lienert.R"</span>)  <span class="co"># this creates a vector `p` of joint probabilities</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>lienert <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">expand.grid</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">X3 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) ), <span class="at">Freq =</span> p)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Freq <span class="sc">~</span> ., lienert)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(X3<span class="sc">+</span>X2 <span class="sc">~</span> X1, tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-54" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./data/lienert.R"</span>)  <span class="co"># this creates a vector `p` of joint probabilities</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>lienert <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">expand.grid</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">X3 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) ), <span class="at">Freq =</span> p)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Freq <span class="sc">~</span> ., lienert)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(X3<span class="sc">+</span>X2 <span class="sc">~</span> X1, tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>   X3  0     1   
    X2  0  1  0  1
@@ -1199,11 +1089,11 @@ X1
 </section>
 <section id="example-2.6---the-coppen-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-2.6---the-coppen-data">Example 2.6 - The Coppen data</h2>
-<div id="cell-54" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Freq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">9</span>, <span class="dv">32</span>, <span class="dv">23</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">16</span>,<span class="dv">25</span>,<span class="dv">22</span>,<span class="dv">46</span>,<span class="dv">27</span>,<span class="dv">14</span>,<span class="dv">8</span>,<span class="dv">47</span>,<span class="dv">12</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">X2 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X4 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X1 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">"y"</span>, <span class="st">"n"</span>))</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>coppen <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, Freq)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>coppen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-56" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>Freq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">9</span>, <span class="dv">32</span>, <span class="dv">23</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">16</span>,<span class="dv">25</span>,<span class="dv">22</span>,<span class="dv">46</span>,<span class="dv">27</span>,<span class="dv">14</span>,<span class="dv">8</span>,<span class="dv">47</span>,<span class="dv">12</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">X2 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X4 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X1 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">"y"</span>, <span class="st">"n"</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>coppen <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, Freq)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>coppen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
