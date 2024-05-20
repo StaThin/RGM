@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>All the examples in the book: Regression Graph Models for Categorical Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="examples_files/libs/clipboard/clipboard.min.js"></script>
+<script src="examples_files/libs/quarto-html/quarto.js"></script>
+<script src="examples_files/libs/quarto-html/popper.min.js"></script>
+<script src="examples_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="examples_files/libs/quarto-html/anchor.min.js"></script>
+<link href="examples_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="examples_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="examples_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="examples_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="examples_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">All the examples in the book: <em>Regression Graph Models for Categorical Data</em></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>M. Lupparelli, G. M. Marchetti, C. Tarantola</p>
+<p>15 May 2024</p>
+<section id="example-1.3---lawyers-ratings-of-state-judges" class="level2">
+<h2 class="anchored" data-anchor-id="example-1.3---lawyers-ratings-of-state-judges">Example 1.3 - Lawyer’s ratings of state judges</h2>
+<div id="cell-3" class="cell" data-scrolled="true" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(USJudgeRatings)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(USJudgeRatings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 6 x 12</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">CONT</th>
+<th data-quarto-table-cell-role="th" scope="col">INTG</th>
+<th data-quarto-table-cell-role="th" scope="col">DMNR</th>
+<th data-quarto-table-cell-role="th" scope="col">DILG</th>
+<th data-quarto-table-cell-role="th" scope="col">CFMG</th>
+<th data-quarto-table-cell-role="th" scope="col">DECI</th>
+<th data-quarto-table-cell-role="th" scope="col">PREP</th>
+<th data-quarto-table-cell-role="th" scope="col">FAMI</th>
+<th data-quarto-table-cell-role="th" scope="col">ORAL</th>
+<th data-quarto-table-cell-role="th" scope="col">WRIT</th>
+<th data-quarto-table-cell-role="th" scope="col">PHYS</th>
+<th data-quarto-table-cell-role="th" scope="col">RTEN</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">AARONSON,L.H.</td>
+<td>5.7</td>
+<td>7.9</td>
+<td>7.7</td>
+<td>7.3</td>
+<td>7.1</td>
+<td>7.4</td>
+<td>7.1</td>
+<td>7.1</td>
+<td>7.1</td>
+<td>7.0</td>
+<td>8.3</td>
+<td>7.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">ALEXANDER,J.M.</td>
+<td>6.8</td>
+<td>8.9</td>
+<td>8.8</td>
+<td>8.5</td>
+<td>7.8</td>
+<td>8.1</td>
+<td>8.0</td>
+<td>8.0</td>
+<td>7.8</td>
+<td>7.9</td>
+<td>8.5</td>
+<td>8.7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">ARMENTANO,A.J.</td>
+<td>7.2</td>
+<td>8.1</td>
+<td>7.8</td>
+<td>7.8</td>
+<td>7.5</td>
+<td>7.6</td>
+<td>7.5</td>
+<td>7.5</td>
+<td>7.3</td>
+<td>7.4</td>
+<td>7.9</td>
+<td>7.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">BERDON,R.I.</td>
+<td>6.8</td>
+<td>8.8</td>
+<td>8.5</td>
+<td>8.8</td>
+<td>8.3</td>
+<td>8.5</td>
+<td>8.7</td>
+<td>8.7</td>
+<td>8.4</td>
+<td>8.5</td>
+<td>8.8</td>
+<td>8.7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">BRACKEN,J.J.</td>
+<td>7.3</td>
+<td>6.4</td>
+<td>4.3</td>
+<td>6.5</td>
+<td>6.0</td>
+<td>6.2</td>
+<td>5.7</td>
+<td>5.7</td>
+<td>5.1</td>
+<td>5.3</td>
+<td>5.5</td>
+<td>4.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">BURNS,E.B.</td>
+<td>6.2</td>
+<td>8.8</td>
+<td>8.7</td>
+<td>8.5</td>
+<td>7.9</td>
+<td>8.0</td>
+<td>8.1</td>
+<td>8.0</td>
+<td>8.0</td>
+<td>8.0</td>
+<td>8.6</td>
+<td>8.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The variables <code>INTG</code> (judicial integrity), <code>DILG</code> (diligence) and <code>CONT</code> (number of contacts of lawyer with judge) are observed on 43 judges. The sample correlation is obtained.</p>
+<div id="cell-5" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_judge <span class="ot">&lt;-</span> USJudgeRatings[, <span class="fu">c</span>(<span class="st">"INTG"</span>, <span class="st">"DILG"</span>, <span class="st">"CONT"</span>)]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(data_judge,<span class="at">panel =</span> panel.smooth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="examples_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-6" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_judge)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(R, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 3 x 3 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">INTG</th>
+<th data-quarto-table-cell-role="th" scope="col">DILG</th>
+<th data-quarto-table-cell-role="th" scope="col">CONT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">INTG</td>
+<td>1.000</td>
+<td>0.872</td>
+<td>-0.133</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">DILG</td>
+<td>0.872</td>
+<td>1.000</td>
+<td>0.012</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">CONT</td>
+<td>-0.133</td>
+<td>0.012</td>
+<td>1.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="cell-7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>( CONT <span class="sc">~</span> INTG<span class="sc">*</span>DILG, <span class="at">data =</span> data_judge) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>
+Call:
+lm(formula = CONT ~ INTG * DILG, data = data_judge)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6239 -0.5936 -0.1044  0.3760  3.2609 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 11.95514    8.87769   1.347    0.186
+INTG        -1.11281    1.19567  -0.931    0.358
+DILG         0.14547    1.26868   0.115    0.909
+INTG:DILG    0.05279    0.15694   0.336    0.738
+
+Residual standard error: 0.9319 on 39 degrees of freedom
+Multiple R-squared:  0.08902,   Adjusted R-squared:  0.01894 
+F-statistic:  1.27 on 3 and 39 DF,  p-value: 0.2979</code></pre>
+</div>
+</div>
+<p>The <span class="math inline">\(F\)</span> statistic for the hypothesis <span class="math inline">\(CONT \perp\!\!\!\perp INTG, DILG\)</span> is not rejected.</p>
+</section>
+<section id="example-1.8---fiji-fertility-survey" class="level2">
+<h2 class="anchored" data-anchor-id="example-1.8---fiji-fertility-survey">Example 1.8 - Fiji Fertility Survey</h2>
+<p>Variables - <code>A</code>, Age - <code>M</code> Age at first marriage - <code>E</code> Education 𝐸 (in completed years) - <code>U</code> Residence (urban = 1 or rural = 0), - <code>F</code> Fertility (number of children ever born),</p>
+<p>observed on a sample of 774 married women of Fijian ethnicity, aged 35-49.</p>
+<div id="cell-10" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fiji <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/fiji_data2.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fijians <span class="ot">&lt;-</span> fiji[fiji<span class="sc">$</span>I <span class="sc">==</span> <span class="dv">0</span>,<span class="sc">-</span><span class="dv">5</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(fijians))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fijians)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 774   5</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>       F                A               M               E         
+ Min.   : 0.000   Min.   :35.00   Min.   :10.00   Min.   : 0.000  
+ 1st Qu.: 3.000   1st Qu.:38.00   1st Qu.:17.00   1st Qu.: 5.000  
+ Median : 6.000   Median :41.00   Median :19.00   Median : 6.000  
+ Mean   : 5.452   Mean   :41.06   Mean   :19.73   Mean   : 5.871  
+ 3rd Qu.: 8.000   3rd Qu.:44.00   3rd Qu.:22.00   3rd Qu.: 7.000  
+ Max.   :14.000   Max.   :49.00   Max.   :44.00   Max.   :20.000  
+       U         
+ Min.   :0.0000  
+ 1st Qu.:0.0000  
+ Median :0.0000  
+ Mean   :0.2726  
+ 3rd Qu.:1.0000  
+ Max.   :1.0000  </code></pre>
+</div>
+</div>
+<section id="the-full-regression-graph" class="level3">
+<h3 class="anchored" data-anchor-id="the-full-regression-graph">The Full regression graph</h3>
+<p>To create an adjacency matrix for a RC graph we are going to use the package <strong>ggm</strong>. The main function used is <code>makeMG</code> (make a mixed graph).</p>
+<div id="cell-12" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggm"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gfull <span class="ot">&lt;-</span> <span class="fu">makeMG</span>(<span class="at">dg =</span> <span class="fu">DAG</span>(F <span class="sc">~</span> M<span class="sc">+</span>E<span class="sc">+</span>A<span class="sc">+</span>U, M <span class="sc">~</span> U <span class="sc">+</span> A,  E <span class="sc">~</span> U <span class="sc">+</span> A), </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">bg =</span> <span class="fu">UG</span>(<span class="sc">~</span> M<span class="sc">*</span>E <span class="sc">+</span>  U<span class="sc">*</span>A))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>gfull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 5 x 5 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">F</th>
+<th data-quarto-table-cell-role="th" scope="col">M</th>
+<th data-quarto-table-cell-role="th" scope="col">E</th>
+<th data-quarto-table-cell-role="th" scope="col">A</th>
+<th data-quarto-table-cell-role="th" scope="col">U</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">F</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">M</td>
+<td>1</td>
+<td>0</td>
+<td>100</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">E</td>
+<td>1</td>
+<td>100</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">A</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">U</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>100</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Plot the graph</p>
+<div id="cell-14" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>co <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>, <span class="dv">36</span>, <span class="dv">36</span>, <span class="dv">64</span>, <span class="dv">36</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">64</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>), <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(gfull, <span class="at">coor =</span> co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="examples_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-a-regression-model-for-fertility" class="level3">
+<h3 class="anchored" data-anchor-id="fit-a-regression-model-for-fertility">Fit a regression model for fertility</h3>
+<div id="cell-16" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(F <span class="sc">~</span> M <span class="sc">+</span> E <span class="sc">+</span> A <span class="sc">+</span> U, <span class="at">data =</span> fijians)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m1)<span class="sc">$</span>coef, <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 5 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">t value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>5.285</td>
+<td>1.200</td>
+<td>4.404</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">M</td>
+<td>-0.206</td>
+<td>0.024</td>
+<td>-8.546</td>
+<td>0.000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">E</td>
+<td>0.009</td>
+<td>0.044</td>
+<td>0.210</td>
+<td>0.834</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">A</td>
+<td>0.111</td>
+<td>0.025</td>
+<td>4.388</td>
+<td>0.000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">U</td>
+<td>-1.389</td>
+<td>0.232</td>
+<td>-5.997</td>
+<td>0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Suggest removing arrow <span class="math inline">\(F \leftarrow E\)</span></p>
+<div id="cell-18" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> A <span class="sc">+</span> U , <span class="at">data =</span> fijians)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 3 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">t value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>19.709</td>
+<td>1.544</td>
+<td>12.768</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">A</td>
+<td>0.007</td>
+<td>0.037</td>
+<td>0.195</td>
+<td>0.846</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">U</td>
+<td>-1.007</td>
+<td>0.344</td>
+<td>-2.926</td>
+<td>0.004</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Suggest removing arrow <span class="math inline">\(M \leftarrow A\)</span></p>
+<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(E <span class="sc">~</span> A <span class="sc">+</span> U , <span class="at">data =</span> fijians)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m3)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 3 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">t value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>9.822</td>
+<td>0.846</td>
+<td>11.607</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">A</td>
+<td>-0.099</td>
+<td>0.020</td>
+<td>-4.812</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">U</td>
+<td>0.343</td>
+<td>0.189</td>
+<td>1.817</td>
+<td>0.07</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Perhaps we can remove the arrow <span class="math inline">\(E \leftarrow U\)</span></p>
+<p>The reduced regression graph</p>
+<div id="cell-23" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>gred <span class="ot">&lt;-</span> gfull</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"E"</span>, <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"A"</span>, <span class="st">"M"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>gred[<span class="st">"U"</span>, <span class="st">"E"</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">drawGraph</span>(gred, <span class="at">coor =</span> co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="examples_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mle-fit-using-package-sem" class="level3">
+<h3 class="anchored" data-anchor-id="mle-fit-using-package-sem">MLE fit using package <strong>sem</strong></h3>
+<p>Structural equations for the saturated model</p>
+<div id="cell-25" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sem"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-26" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sat_mod_F <span class="ot">&lt;-</span> <span class="fu">specifyModel</span>(<span class="at">text=</span><span class="st">"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">M -&gt; F, bFM, NA</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; F, bFA, NA</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; F, bFU, NA</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">E -&gt; F, bFE, NA</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; M, bMU, NA</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; M, bMA, NA</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; E, bEA, NA</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; E, bEU, NA</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">F &lt;-&gt; F, oFF, NA</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; M, oMM, NA</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; E, oME, NA</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="st">E &lt;-&gt; E, oEE, NA</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; A, oAA, NA</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; U, oAU, NA</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="st">U &lt;-&gt; U, oUU, NA</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: it is generally simpler to use specifyEquations() or cfa()
+      see ?specifyEquations
+</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(fijians)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m_sat <span class="ot">&lt;-</span>  <span class="fu">sem</span>(sat_mod_F, S, <span class="at">N =</span> <span class="dv">774</span>, <span class="at">start.tol =</span> <span class="fl">1e-09</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_sat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>
+ Model Chisquare =  -6.865619e-13   Df =  0 Pr(&gt;Chisq) = NA
+ AIC =  30
+ BIC =  -6.865619e-13
+
+ Normalized Residuals
+      Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+-2.741e-15 -3.027e-16  0.000e+00 -3.973e-17  3.639e-16  1.248e-15 
+
+ R-square for Endogenous Variables
+     M      F      E 
+0.0110 0.1335 0.0331 
+
+ Parameter Estimates
+    Estimate     Std Error  z value     Pr(&gt;|z|)             
+bFM -0.206025906 0.02404668 -8.56774948 1.055271e-17 F &lt;--- M
+bFA  0.110974275 0.02522646  4.39912135 1.086900e-05 F &lt;--- A
+bFU -1.388761080 0.23099040 -6.01220252 1.830195e-09 F &lt;--- U
+bFE  0.009244430 0.04386276  0.21075804 8.330761e-01 F &lt;--- E
+bMU -1.007277214 0.34380453 -2.92979621 3.391844e-03 M &lt;--- U
+bMA  0.007265717 0.03729347  0.19482543 8.455296e-01 M &lt;--- A
+bEA -0.098507206 0.02044523 -4.81810270 1.449298e-06 E &lt;--- A
+bEU  0.342845890 0.18848235  1.81898137 6.891427e-02 E &lt;--- U
+oFF  8.055230086 0.40973513 19.65960325 4.784540e-86 F &lt;--&gt; F
+oMM 18.141375148 0.92277422 19.65960325 4.784540e-86 M &lt;--&gt; M
+oME  0.808827798 0.35889797  2.25364270 2.421865e-02 E &lt;--&gt; M
+oEE  5.452408758 0.27734073 19.65960325 4.784540e-86 E &lt;--&gt; E
+oAA 16.874382837 0.85832774 19.65960325 4.784540e-86 A &lt;--&gt; A
+oAU  0.004711667 0.06583561  0.07156716 9.429464e-01 U &lt;--&gt; A
+oUU  0.198550230 0.01009940 19.65960325 4.784540e-86 U &lt;--&gt; U
+
+ Iterations =  0 </code></pre>
+</div>
+</div>
+<p>Reduced model</p>
+<div id="cell-29" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>red_mod_F <span class="ot">&lt;-</span> <span class="fu">specifyModel</span>(<span class="at">text=</span><span class="st">"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">M -&gt; F, bFM, NA</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; F, bFA, NA</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; F, bFU, NA</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">U -&gt; M, bMU, NA</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">A -&gt; E, bEA, NA</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">F &lt;-&gt; F, oFF, NA</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; M, oMM, NA</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">M &lt;-&gt; E, oME, NA</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">E &lt;-&gt; E, oEE, NA</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; A, oAA, NA</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="st">A &lt;-&gt; U, oAU, NA</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="st">U &lt;-&gt; U, oUU, NA</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>m_red <span class="ot">&lt;-</span>  <span class="fu">sem</span>(red_mod_F, S, <span class="at">N =</span> <span class="dv">774</span>, <span class="at">start.tol =</span> <span class="fl">1e-09</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: it is generally simpler to use specifyEquations() or cfa()
+      see ?specifyEquations
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>
+ Model Chisquare =  3.384157   Df =  3 Pr(&gt;Chisq) = 0.3361003
+ AIC =  27.38416
+ BIC =  -16.57056
+
+ Normalized Residuals
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-0.22861 -0.04188  0.00000  0.13696  0.01545  1.78854 
+
+ R-square for Endogenous Variables
+     M      F      E 
+0.0121 0.1335 0.0292 
+
+ Parameter Estimates
+    Estimate     Std Error  z value     Pr(&gt;|z|)             
+bFM -0.205613746 0.02396717 -8.57897348 9.572354e-18 F &lt;--- M
+bFA  0.110060638 0.02485130  4.42876696 9.477336e-06 F &lt;--- A
+bFU -1.385176505 0.23050041 -6.00943175 1.861747e-09 F &lt;--- U
+bMU -1.057957966 0.34266787 -3.08741516 2.019054e-03 M &lt;--- U
+bEA -0.098737351 0.02041987 -4.83535602 1.329075e-06 E &lt;--- A
+oFF  8.055692965 0.40975867 19.65960325 4.784540e-86 F &lt;--&gt; F
+oMM 18.142192602 0.92281581 19.65960325 4.784540e-86 M &lt;--&gt; M
+oME  0.812115820 0.35966271  2.25799283 2.394611e-02 E &lt;--&gt; M
+oEE  5.475282718 0.27850423 19.65960325 4.784540e-86 E &lt;--&gt; E
+oAA 16.874382837 0.85832774 19.65960325 4.784540e-86 A &lt;--&gt; A
+oAU  0.004711667 0.06583561  0.07156716 9.429464e-01 U &lt;--&gt; A
+oUU  0.198550230 0.01009940 19.65960325 4.784540e-86 U &lt;--&gt; U
+
+ Iterations =  6 </code></pre>
+</div>
+</div>
+</section>
+<section id="fitting-the-multivariate-regression-chain-graph" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-the-multivariate-regression-chain-graph">Fitting the multivariate regression chain graph</h3>
+<p>The regression chain graphs is a special case of ancestral graph. Thus you can use the function <code>fitAncestralGraph</code> in package <strong>ggm</strong>. Source also the file <code>dome_functions.R</code>.</p>
+<div id="cell-31" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./R/some_functions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Saturated model</p>
+<div id="cell-33" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggm"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>out_sat <span class="ot">&lt;-</span> <span class="fu">fitAncestralGraph</span>(gfull, S, <span class="at">n =</span> <span class="dv">774</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRCG</span>(out_sat, <span class="at">n =</span> <span class="dv">774</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      beta    se     LB     UB
+F|A  0.111 0.025  0.046  0.176
+M|A  0.007 0.037 -0.089  0.103
+E|A -0.099 0.020 -0.151 -0.046
+F|M -0.206 0.024 -0.268 -0.144
+F|E  0.009 0.044 -0.104  0.122
+F|U -1.389 0.231 -1.984 -0.793
+M|U -1.007 0.344 -1.894 -0.121
+E|U  0.343 0.188 -0.143  0.829
+     omega    se     LB     UB
+F~F  8.055 0.409  6.999  9.112
+A~A 16.874 0.858 14.661 19.087
+U~A  0.005 0.093 -0.235  0.245
+M~M 18.141 0.922 15.762 20.521
+E~M  0.809 0.506 -0.496  2.113
+M~E  0.809 0.506 -0.496  2.113
+E~E  5.452 0.277  4.737  6.167
+A~U  0.005 0.093 -0.235  0.245
+U~U  0.199 0.010  0.173  0.225</code></pre>
+</div>
+</div>
+<p>Reduced model</p>
+<div id="cell-35" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>out_red <span class="ot">&lt;-</span> <span class="fu">fitAncestralGraph</span>(gred, S, <span class="at">n =</span> <span class="dv">774</span>, <span class="at">tol =</span> <span class="fl">1e-09</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRCG</span>(out_sat, <span class="at">n =</span> <span class="dv">774</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      beta    se     LB     UB
+F|A  0.111 0.025  0.046  0.176
+M|A  0.007 0.037 -0.089  0.103
+E|A -0.099 0.020 -0.151 -0.046
+F|M -0.206 0.024 -0.268 -0.144
+F|E  0.009 0.044 -0.104  0.122
+F|U -1.389 0.231 -1.984 -0.793
+M|U -1.007 0.344 -1.894 -0.121
+E|U  0.343 0.188 -0.143  0.829
+     omega    se     LB     UB
+F~F  8.055 0.409  6.999  9.112
+A~A 16.874 0.858 14.661 19.087
+U~A  0.005 0.093 -0.235  0.245
+M~M 18.141 0.922 15.762 20.521
+E~M  0.809 0.506 -0.496  2.113
+M~E  0.809 0.506 -0.496  2.113
+E~E  5.452 0.277  4.737  6.167
+A~U  0.005 0.093 -0.235  0.245
+U~U  0.199 0.010  0.173  0.225</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="example-1.13-data-on-womens-labour-force-participation" class="level2">
+<h2 class="anchored" data-anchor-id="example-1.13-data-on-womens-labour-force-participation">Example 1.13 Data on Women’s Labour-Force Participation</h2>
+<p>The original data are in R package <strong>carData</strong>. The first 3 variables are transformed to binary data. The resulting variables are all categorical.</p>
+<div id="cell-37" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>wlf_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"./data/wlfdata.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>wlf_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">lapply</span>(wlfdata, factor))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(R <span class="sc">~</span> H <span class="sc">+</span> C <span class="sc">+</span> L, <span class="at">data =</span> wlfdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>ERROR: Error in eval(expr, envir, enclos): object 'wlfdata' not found</code></pre>
+</div>
+</div>
+<section id="test-conditional-independency" class="level3">
+<h3 class="anchored" data-anchor-id="test-conditional-independency">Test conditional independency</h3>
+<p>You need package <strong>bnlearn</strong> for this.</p>
+<div id="cell-39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bnlearn)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.test</span>( <span class="st">"H"</span>, <span class="st">"C"</span>, <span class="st">"L"</span>, <span class="at">data =</span> wlf_data, <span class="at">test =</span> <span class="st">"mi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>
+    Mutual Information (disc.)
+
+data:  H ~ C | L
+mi = 0.38496, df = 2, p-value = 0.8249
+alternative hypothesis: true value is greater than 0</code></pre>
+</div>
+</div>
+<p>Response <span class="math inline">\(L\)</span>: Fit an additive logistic model</p>
+<div id="cell-41" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>m_add1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(L <span class="sc">~</span> C <span class="sc">+</span> H <span class="sc">+</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_add1)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 7 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">z value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>1.041</td>
+<td>0.607</td>
+<td>1.715</td>
+<td>0.086</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">C1</td>
+<td>-2.609</td>
+<td>0.361</td>
+<td>-7.234</td>
+<td>0.000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">H1</td>
+<td>-0.768</td>
+<td>0.348</td>
+<td>-2.210</td>
+<td>0.027</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RBC</td>
+<td>-0.944</td>
+<td>0.745</td>
+<td>-1.266</td>
+<td>0.206</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">ROntario</td>
+<td>-0.254</td>
+<td>0.590</td>
+<td>-0.430</td>
+<td>0.667</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RPrairie</td>
+<td>0.168</td>
+<td>0.695</td>
+<td>0.241</td>
+<td>0.809</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">RQuebec</td>
+<td>-0.342</td>
+<td>0.627</td>
+<td>-0.545</td>
+<td>0.586</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>This suggests to remove the arrow <span class="math inline">\(L \leftarrow R\)</span>. The reduced model is below with a likelihood ratio test.</p>
+<div id="cell-43" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>m_red1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(L <span class="sc">~</span> C <span class="sc">+</span> H, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_red1)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">anova</span>(m_red1, m_add1, <span class="at">test =</span> <span class="st">"Chisq"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>
+Call:
+glm(formula = L ~ C + H, family = binomial, data = wlf_data)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   0.6834     0.2797   2.443   0.0146 *  
+C1           -2.4404     0.3346  -7.294 3.02e-13 ***
+H1           -0.7896     0.3397  -2.324   0.0201 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 296.34  on 262  degrees of freedom
+Residual deviance: 228.31  on 260  degrees of freedom
+AIC: 234.31
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: L ~ C + H
+Model 2: L ~ C + H + R
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
+1       260     228.31                     
+2       256     225.50  4   2.8117   0.5898</code></pre>
+</div>
+</div>
+<p>Response <span class="math inline">\(C\)</span>: fit an additive model</p>
+<div id="cell-45" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>m_add2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(C <span class="sc">~</span> H <span class="sc">+</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_add2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 6 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">z value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>1.671</td>
+<td>0.551</td>
+<td>3.030</td>
+<td>0.002</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">H1</td>
+<td>0.437</td>
+<td>0.282</td>
+<td>1.546</td>
+<td>0.122</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">RBC</td>
+<td>-1.827</td>
+<td>0.656</td>
+<td>-2.785</td>
+<td>0.005</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">ROntario</td>
+<td>-1.092</td>
+<td>0.579</td>
+<td>-1.886</td>
+<td>0.059</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">RPrairie</td>
+<td>-0.136</td>
+<td>0.730</td>
+<td>-0.186</td>
+<td>0.852</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RQuebec</td>
+<td>-1.250</td>
+<td>0.598</td>
+<td>-2.089</td>
+<td>0.037</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The predictor <span class="math inline">\(H\)</span> is not significant. The reduced model is</p>
+<div id="cell-47" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>m_red2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(C<span class="sc">~</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlfdata)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_red2)<span class="sc">$</span>coef, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 5 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">z value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>1.872</td>
+<td>0.537</td>
+<td>3.485</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RBC</td>
+<td>-1.803</td>
+<td>0.653</td>
+<td>-2.760</td>
+<td>0.006</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">ROntario</td>
+<td>-1.051</td>
+<td>0.576</td>
+<td>-1.823</td>
+<td>0.068</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RPrairie</td>
+<td>-0.223</td>
+<td>0.726</td>
+<td>-0.307</td>
+<td>0.759</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">RQuebec</td>
+<td>-1.270</td>
+<td>0.596</td>
+<td>-2.129</td>
+<td>0.033</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: C ~ R
+Model 2: C ~ H + R
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
+1       258     308.54                     
+2       257     306.13  1   2.4135   0.1203</code></pre>
+</div>
+</div>
+<p>Response <span class="math inline">\(H\)</span>: fit a multinomial logit model</p>
+<div id="cell-49" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(H <span class="sc">~</span> R, <span class="at">family =</span> binomial, <span class="at">data =</span> wlf_data)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m_3)<span class="sc">$</span>coef, <span class="dv">3</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>m_red3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(H <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial, <span class="at">data =</span> wlfdata)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_red3, m_3, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 5 x 4 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th data-quarto-table-cell-role="th" scope="col">z value</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">(Intercept)</td>
+<td>0.000</td>
+<td>0.365</td>
+<td>0.000</td>
+<td>1.000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RBC</td>
+<td>0.069</td>
+<td>0.521</td>
+<td>0.132</td>
+<td>0.895</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">ROntario</td>
+<td>0.298</td>
+<td>0.414</td>
+<td>0.721</td>
+<td>0.471</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">RPrairie</td>
+<td>-0.894</td>
+<td>0.538</td>
+<td>-1.660</td>
+<td>0.097</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">RQuebec</td>
+<td>-0.279</td>
+<td>0.443</td>
+<td>-0.629</td>
+<td>0.529</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+355.307813865973
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A anova: 2 x 5</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">Resid. Df</th>
+<th data-quarto-table-cell-role="th" scope="col">Resid. Dev</th>
+<th data-quarto-table-cell-role="th" scope="col">Df</th>
+<th data-quarto-table-cell-role="th" scope="col">Deviance</th>
+<th data-quarto-table-cell-role="th" scope="col">Pr(&gt;Chi)</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">1</td>
+<td>262</td>
+<td>364.5004</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">2</td>
+<td>258</td>
+<td>355.3078</td>
+<td>4</td>
+<td>9.19254</td>
+<td>0.05646299</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The LRT statistic is <span class="math inline">\(9.19\)</span> with <span class="math inline">\(4\)</span> d.f. denotes some evidence against the independence of <span class="math inline">\(H\)</span> on <span class="math inline">\(R\)</span>.</p>
+</section>
+</section>
+<section id="example-2.1---lienert-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-2.1---lienert-data">Example 2.1 - Lienert data</h2>
+<div id="cell-52" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./data/lienert.R"</span>)  <span class="co"># this creates a vector `p` of joint probabilities</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>lienert <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">expand.grid</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">X3 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) ), <span class="at">Freq =</span> p)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Freq <span class="sc">~</span> ., lienert)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(X3<span class="sc">+</span>X2 <span class="sc">~</span> X1, tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>   X3  0     1   
+   X2  0  1  0  1
+X1               
+0     21  5  4 16
+1      2 13 11  1</code></pre>
+</div>
+</div>
+</section>
+<section id="example-2.6---the-coppen-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-2.6---the-coppen-data">Example 2.6 - The Coppen data</h2>
+<div id="cell-54" class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Freq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">9</span>, <span class="dv">32</span>, <span class="dv">23</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">16</span>,<span class="dv">25</span>,<span class="dv">22</span>,<span class="dv">46</span>,<span class="dv">27</span>,<span class="dv">14</span>,<span class="dv">8</span>,<span class="dv">47</span>,<span class="dv">12</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">X2 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X4 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X1 =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">"y"</span>, <span class="st">"n"</span>))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>coppen <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, Freq)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>coppen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 16 x 5</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">X2</th>
+<th data-quarto-table-cell-role="th" scope="col">X4</th>
+<th data-quarto-table-cell-role="th" scope="col">X1</th>
+<th data-quarto-table-cell-role="th" scope="col">X3</th>
+<th data-quarto-table-cell-role="th" scope="col">Freq</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="col">&lt;fct&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;fct&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;fct&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;fct&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>y</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>y</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>y</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>y</td>
+<td>32</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>y</td>
+<td>23</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>y</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>y</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>y</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>n</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>n</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>n</td>
+<td>46</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>n</td>
+<td>27</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>n</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>n</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>n</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>n</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
