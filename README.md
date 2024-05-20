@@ -1,4 +1,6 @@
 ## Datasets and examples from the book *Regression Graphs for Categorical Data*
 
-- Example 1
+- The datasets are in `./data`
+- The examples are in the Jupyter file`examples.ipynb`
 
+ 
